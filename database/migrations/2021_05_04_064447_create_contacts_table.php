@@ -1,0 +1,44 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateContactsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id'); //konekcija
+            $table->string('name');
+            $table->integer('age');
+            $table->string('address');
+            $table->string('mobile');
+            $table->string('email')->unique();
+            $table->unsignedInteger('currentaccountbalance');
+            $table->unsignedInteger('credit');
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('contacts');
+    }
+}
