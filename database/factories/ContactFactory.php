@@ -28,7 +28,7 @@ class ContactFactory extends Factory
             'age' => $this->faker->numberBetween(18,90),
             'address' => $this->faker->address(),
             'mobile' => $this->faker->phoneNumber(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => $this->faker->safeEmail(),
             'currentaccountbalance' => $this->faker->numberBetween(1000,10000),
             'credit'=> $this->faker->numberBetween(0,10000)   
         ];

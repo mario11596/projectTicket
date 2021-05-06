@@ -12,7 +12,7 @@
 
                 <form action="{{ route('update', $contact->id) }}" method="POST" >
                  @csrf
-                 @method('PUT')
+                
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -25,7 +25,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Godine:</strong>
-                        <textarea class="form-control" style="height:50px" name="age" id="age" value="{{ $contact->age}}" placeholder="godine"></textarea>
+                        <input class="form-control" style="height:50px" name="age" id="age" type="number" value="{{ $contact->age}}" placeholder="godine"/>
                     </div>
                 </div>
 

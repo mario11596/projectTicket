@@ -23,7 +23,7 @@ class ContactsController extends Controller{
 
     public function store(){ //spremamo novi kontakt
 
-        $id = Auth::id();
+        $user_id = Auth::id();
 
         $contact = new Contact();
         $contact->name = request('name');
@@ -33,7 +33,7 @@ class ContactsController extends Controller{
         $contact->email = request('email');
         $contact->currentaccountbalance = request('currentaccountbalance');
         $contact->credit = request('credit');
-        $contact->user_id = $id;
+        $contact->user_id = $user_id;
         $contact->save();
 
         return redirect('/contact');
@@ -45,10 +45,10 @@ class ContactsController extends Controller{
     }
 
     public function update($id){ //spremiti promjene kontakt
-        $id = Auth::id();
-    
-        $contact = Contact::find($id);
-        $contact = new Contact();
+
+        $user_id = Auth::id();
+        $contact = Contact::where("id","=",$id)->get()->first();
+      
         $contact->name = request('name');
         $contact->age = request('age');
         $contact->address = request('address');
@@ -56,7 +56,7 @@ class ContactsController extends Controller{
         $contact->email = request('email');
         $contact->currentaccountbalance = request('currentaccountbalance');
         $contact->credit = request('credit');
-        $contact->user_id = $id;
+        $contact->user_id = $user_id;
     
         $contact->save();
 
@@ -74,9 +74,5 @@ class ContactsController extends Controller{
 
         return view('show', compact('contact'));
     }
-
-
-
-
-    
+  
 }
