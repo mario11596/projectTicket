@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+
 use App\Models\Contact;
 
 class ContactsController extends Controller{
@@ -21,10 +22,20 @@ class ContactsController extends Controller{
         return view('create');
     }
 
-    public function store(){ //spremamo novi kontakt
+    public function store(Request $request){ //spremamo novi kontakt
 
         $user_id = Auth::id();
 
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'address' => 'required',
+            'mobile' => 'required',
+            'email' => 'required',
+            'currentaccountbalance' => 'required',
+            'credit' => 'required',
+        ]);
+    
         $contact = new Contact();
         $contact->name = request('name');
         $contact->age = request('age');
@@ -36,12 +47,20 @@ class ContactsController extends Controller{
         $contact->user_id = $user_id;
         $contact->save();
 
-        return redirect('/contact');
+        return redirect('/contact')->with('success', 'Uspješno je spremljen novi kontakt');
     }
     
     public function edit($id){ //uređivanje kontakta
-        $contact = Contact::find($id);
+        $contact = Contact::findorFail($id);
+
+        if($contact->user_id != Auth::id()){
+            return redirect('/contact');
+        }
         return view('edit', compact('contact'));
+
+
+        /*$contact = Contact::find($id);
+        return view('edit', compact('contact'));*/
     }
 
     public function update($id){ //spremiti promjene kontakt
@@ -60,13 +79,16 @@ class ContactsController extends Controller{
     
         $contact->save();
 
-        return redirect('/contact');
+        //return redirect('/contact');
+        return redirect('/contact')->with('info', 'Uspješno je ažuriran kontakt');
     }
 
     public function destory(Contact $contact){ //brisanje kontakata
         $contact->delete();
 
-        return redirect('/contact'); 
+        //return redirect('/contact'); 
+        return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
+
     }
 
     public function show($id){ //pokazuje specificirano
