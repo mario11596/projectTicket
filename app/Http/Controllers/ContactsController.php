@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 
+
 use App\Models\Contact;
 
 class ContactsController extends Controller{
@@ -63,10 +64,20 @@ class ContactsController extends Controller{
         return view('edit', compact('contact'));*/
     }
 
-    public function update($id){ //spremiti promjene kontakt
+    public function update(Request $request,$id){ //spremiti promjene kontakt
 
         $user_id = Auth::id();
         $contact = Contact::where("id","=",$id)->get()->first();
+
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'address' => 'required',
+            'mobile' => 'required',
+            'email' => 'required',
+            'currentaccountbalance' => 'required',
+            'credit' => 'required',
+        ]);
       
         $contact->name = request('name');
         $contact->age = request('age');
@@ -91,10 +102,12 @@ class ContactsController extends Controller{
 
     }
 
-    public function show($id){ //pokazuje specificirano
-        $contact = Contact::findOrFail($id);
+    public function show(Contact $contact){ //pokazuje specificirano
+        
 
         return view('show', compact('contact'));
     }
+
+
   
 }

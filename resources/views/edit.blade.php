@@ -13,6 +13,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+
                 <form action="{{ route('update', $contact->id) }}" method="POST" >
                  @csrf
                 
@@ -27,7 +39,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Godine:</strong>
+                        <strong>Godine starosti:</strong>
                         <input class="form-control" style="height:50px" name="age" id="age" type="number" value="{{ $contact->age}}" placeholder="godine"/>
                     </div>
                 </div>
@@ -41,7 +53,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Broj mobitela:</strong>
+                        <strong>Broj mobilnog telefona:</strong>
                         <input type="text" name="mobile" id="mobile" value="{{ $contact->mobile}}" class="form-control" placeholder="broj mobitela">
                     </div>
                 </div>
@@ -55,14 +67,14 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Trenutno stanje tekućeg računa:</strong>
+                        <strong>Stanje tekućeg računa:</strong>
                         <input type="number" name="currentaccountbalance" id="currentaccountbalance" value="{{ $contact->currentaccountbalance}}" class="form-control" placeholder="stanje tekućeg računa">
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Iznos kredita:</strong>
+                        <strong>Iznos trenutnog kredita:</strong>
                         <input type="number" name="credit" id="credit" value="{{ $contact->credit}}" class="form-control" placeholder="iznos kredita">
                     </div>
                 </div>

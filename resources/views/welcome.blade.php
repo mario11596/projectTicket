@@ -24,11 +24,11 @@
     </head>
     <body>
       
-        <div class="relative flex items-top justify-center min-h-screen sm:items-center bg-info">
+        <div class="relative flex items-top justify-center min-h-screen sm:items-center bg-info ">
             @if (Route::has('login'))
-            <div class="card text_center" style="width: 20rem; height: 20rem">
+            <div class="card text_center " style="width: 20rem; height: 20rem">
                 <div class="card-body">
-                    <h5 class="card-title card-header fw-bold">Dobro došli u Ticket sustav</h5>
+                    <h5 class="card-title card-header fw-bold ">Dobro došli u Ticket sustav</h5>
                          <p class="card-text"> Odaberite jednu od mogućnosti prijave u naš sustav:
                     @auth
                         <div style="height: 30%"> Povratak u profil: 

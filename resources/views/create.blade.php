@@ -38,8 +38,8 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Godine:</strong>
-                        <input class="form-control" name="age" type="number"  placeholder="godine"/>
+                        <strong>Godine starosti:</strong>
+                        <input class="form-control" name="age" type="number"  placeholder="godine starosti"/>
                     </div>
                 </div>
 
@@ -52,8 +52,8 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Broj mobitela:</strong>
-                        <input type="text" name="mobile" class="form-control" placeholder="broj mobitela">
+                        <strong>Broj mobilnog telefona:</strong>
+                        <input type="text" name="mobile" class="form-control" placeholder="broj mobilnog telefona">
                     </div>
                 </div>
 
@@ -66,14 +66,14 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Trenutno stanje tekućeg računa:</strong>
+                        <strong>Stanje tekućeg računa:</strong>
                         <input type="number" name="currentaccountbalance" class="form-control" placeholder="stanje tekućeg računa">
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Iznos kredita:</strong>
+                        <strong>Iznos trenutnog kredita:</strong>
                         <input type="number" name="credit" class="form-control" placeholder="iznos kredita">
                     </div>
                 </div>
@@ -81,16 +81,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Spremi kontakt</button>
                 </div>
-                </div>
 
+                </div>
                 </form>
 
             
               </div>
             </div>
-        </div>
-    </div>
-
         </div>
     </div>
 </x-app-layout>

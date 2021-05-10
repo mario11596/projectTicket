@@ -15,15 +15,15 @@
                 <div class="p-6 bg-white border-b border-gray-200">
 
                     <ul class="list-group list-group-flush">
-                         <li class="list-group-item fw-bold fs-5"> Upravljanje kontakima: </li>
+                         <li class="list-group-item fw-bold fs-5"> Upravljanje kontaktima: </li>
 
                         <li class="list-group-item">
-                        <a class="btn btn-outline-primary " 
+                        <a class="btn btn-outline-primary rounded-full" 
                         href="{{ route('index') }}">Svi kontakti</a>
                         </li>
 
                         <li class="list-group-item">
-                        <a class="btn btn-outline-secondary" 
+                        <a class="btn btn-outline-secondary rounded-full" 
                         href="{{ route('create') }}"> Novi kontakt</a>
                         </li>
                     </ul>

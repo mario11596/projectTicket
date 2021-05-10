@@ -27,20 +27,21 @@
                     </div>
                 @endif
 
-
+            
              <a href="{{ route('create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dodaj novog</a>
-       
+
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                 <table class="table table-bordered table-responsive-lg table table-stripe">
                 <tr>
-                    <th>Ime</th>
+                    <th>Ime i prezime</th>
                     <th>Godine starosti</th>
                     <th>Adresa stanovanja</th>
                     <th>Broj mobilnog telefona</th>
                     <th>E-mail adresa</th>
-                    <th>Stanje tekučeg računa</th>
-                    <th>Iznos trenutnog kredit</th>
+                    <th>Stanje tekućeg računa</th>
+                    <th>Iznos trenutnog kredita</th>
                    
                 
                 </tr>
@@ -58,6 +59,9 @@
                         </td>
                         <td>
                         <a href="{{ route('destory', $contact->id) }}" class="btn btn-danger">Obriši</a>         
+                        </td>
+                        <td>
+                        <a href="{{ route('show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
                         </td>
                     </tr>                          
                     @endforeach

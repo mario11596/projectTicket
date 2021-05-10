@@ -32,10 +32,12 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/contact', [ContactsController::class, 'index'])->name('index');
     Route::post('/contact', [ContactsController::class, 'store'])->name('store');
     Route::get('/contact/create', [ContactsController::class, 'create'])->name('create');
-    Route::get('/contact/{contact}', [ContactsController::class, 'show'])->name('show');
+    Route::get('/contact/{contact}/show', [ContactsController::class, 'show'])->name('show');
     Route::get('/contact/{contact}/edit', [ContactsController::class, 'edit'])->name('edit');
     Route::post('/contact/{contact}', [ContactsController::class, 'update'])->name('update');
     Route::get('/contact/{contact}', [ContactsController::class, 'destory'])->name('destory');
+
+   
 });
 
 
