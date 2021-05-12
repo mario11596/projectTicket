@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Ticket;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ContactsController extends Controller{
 
     public function index(){  //izlistava sve
@@ -95,11 +97,21 @@ class ContactsController extends Controller{
         return redirect('/contact')->with('info', 'Uspješno je ažuriran kontakt');
     }
 
-    public function destory(Contact $contact){ //brisanje kontakata
+    public function destory($id){ //brisanje kontakata
       
      
-            $contact->delete();
+           // $contact->delete();
+            //return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
+
+        $check_id_date = Ticket::where('contact_id', $id)->get();
+       // error_log($check_id_date);
+
+        if(count($check_id_date) > 0){
+            return redirect('/contact')->with('warning', 'Kontakt ima zahtjev, nemožete ga obrisati');
+        } else {
+            Contact::where('id',$id)->delete();
             return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
+        }
         
     }
 

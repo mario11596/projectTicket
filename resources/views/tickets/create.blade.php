@@ -58,7 +58,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                          <div class="form-group">
                             <strong>Korisnik:</strong>
-                            <input type="text" name="name_contact" class="form-control" placeholder="korisnik">
+                            <input type="text" name="name_contact" class="form-control" value="{{ $name ?? ' ' }}">
                         </div>
                     </div>
                 </div>

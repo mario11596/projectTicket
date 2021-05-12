@@ -70,7 +70,7 @@
                         <a href="{{ route('show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
                         </td>
                         <td>
-                        <a href="{{ route('ticket_create', $contact->id) }}" class="btn btn-secondary">Zahtjev</a>         
+                        <a href="{{ route('ticket_create_user', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
                         </td>
                     </tr>                          
                     @endforeach

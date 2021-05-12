@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/contact/{contact}', [ContactsController::class, 'destory'])->name('destory');
     Route::get('/search', [ContactsController::class, 'search'])->name('search');
 
-    //Route::get('/ticket/create/{contact}', [TicketsController::class, 'ticket_create_contact'])->name('ticket_create_contact');
+    Route::get('/ticket/create/{name}', [TicketsController::class, 'ticket_create_user'])->name('ticket_create_user');
 
     Route::get('/ticket', [TicketsController::class, 'ticket_index'])->name('ticket_index');
     Route::post('/ticket', [TicketsController::class, 'ticket_store'])->name('ticket_store');

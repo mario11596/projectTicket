@@ -42,8 +42,8 @@ class TicketsController extends Controller
             'message' => 'required', 
             'name_contact' => 'required'
         ]);
-
-        $find_id = Contact::where('name', "=", $request->name_contact)->first()->id;
+        //autokomplit pogledati
+        $find_id = Contact::where('name', "=", $request->name_contact)->pluck('id')->first();
 
     
         $contact = Contact::findorFail($find_id);
@@ -85,6 +85,16 @@ class TicketsController extends Controller
 
         return redirect('/ticket')->with('warning', 'Uspješno je izbrisan zahtjev korisnika');
     }
+
+    public function ticket_create_user($name){ //novi kontakt
+
+        //$name = $name;
+
+        $categories = Category::all();
+
+        return view('tickets.create', compact('categories', 'name'));
+    }
+
 
     
    
