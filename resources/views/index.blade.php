@@ -26,9 +26,15 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-
+                <div class="input-group">
+                    <form action="{{ route('search') }}" method="GET" role="search">
+                        <input type="text" name="search" required/>
+                        <button type="submit">Pretraži</button>
+                    </form>
+                </div>
             
              <a href="{{ route('create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dodaj novog</a>
+             
 
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -62,6 +68,9 @@
                         </td>
                         <td>
                         <a href="{{ route('show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
+                        </td>
+                        <td>
+                        <a href="{{ route('ticket_create', $contact->id) }}" class="btn btn-secondary">Zahtjev</a>         
                         </td>
                     </tr>                          
                     @endforeach

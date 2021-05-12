@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\TicketsController;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/contact/{contact}/edit', [ContactsController::class, 'edit'])->name('edit');
     Route::post('/contact/{contact}', [ContactsController::class, 'update'])->name('update');
     Route::get('/contact/{contact}', [ContactsController::class, 'destory'])->name('destory');
+    Route::get('/search', [ContactsController::class, 'search'])->name('search');
+
+    //Route::get('/ticket/create/{contact}', [TicketsController::class, 'ticket_create_contact'])->name('ticket_create_contact');
+
+    Route::get('/ticket', [TicketsController::class, 'ticket_index'])->name('ticket_index');
+    Route::post('/ticket', [TicketsController::class, 'ticket_store'])->name('ticket_store');
+    Route::get('/ticket/create', [TicketsController::class, 'ticket_create'])->name('ticket_create');
+    Route::get('/ticket/{ticket}/close', [TicketsController::class, 'ticket_close'])->name('ticket_close');
+    Route::get('/ticket/{ticket}/open', [TicketsController::class, 'ticket_open'])->name('ticket_open');
+    //ovo još vidjeti
+   // Route::post('/contact/{contact}', [TicketsController::class, 'ticket_update'])->name('ticket_update');
+    Route::get('/ticket/{ticket}', [TicketsController::class, 'ticket_destory'])->name('ticket_destory');
 
    
 });

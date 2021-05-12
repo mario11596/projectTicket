@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 
 use App\Models\Contact;
+use App\Models\Ticket;
 
 class ContactsController extends Controller{
 
@@ -95,17 +96,28 @@ class ContactsController extends Controller{
     }
 
     public function destory(Contact $contact){ //brisanje kontakata
-        $contact->delete();
-
-        //return redirect('/contact'); 
-        return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
-
+      
+     
+            $contact->delete();
+            return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
+        
     }
 
     public function show(Contact $contact){ //pokazuje specificirano
         
 
         return view('show', compact('contact'));
+    }
+    //tražilica
+    public function search(Request $request){
+        $search = $request->input('search');
+   
+
+        $contacts = Contact::query()
+                    ->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->get();
+        return view('index', compact('contacts'));
     }
 
 
