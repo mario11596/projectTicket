@@ -95,7 +95,19 @@ class TicketsController extends Controller
         return view('tickets.create', compact('categories', 'name'));
     }
 
-
-    
+    public function ticket_search(Request $request){
+        $search = $request->input('search');
    
+        $tickets = Ticket::query()
+                    ->where('title', 'LIKE', "%{$search}%")
+                    ->get();
+        return view('tickets.index', compact('tickets'));
+    }
+
+    public function ticket_show($id){ 
+        $ticket = Ticket::where('id', $id)->first();
+
+        return view('tickets.show', compact('ticket'));
+    }
+     
 }

@@ -27,6 +27,13 @@
                     </div>
                 @endif
 
+                <div class="input-group">
+                    <form action="{{ route('ticket_search') }}" method="GET" role="search">
+                        <input type="text" name="search" required/>
+                        <button type="submit">Pretraži</button>
+                    </form>
+                </div>
+
             
              <a href="{{ route('ticket_create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Otvori novi zahtjev</a>
 
@@ -40,7 +47,6 @@
                     <th>E-mail adresa</th>
                     <th>Prioritet</th>
                     <th>Vrsta zahtjeva</th>
-                    <th>Zatraženi zahtjev</th>
                     <th>Status zahtjeva</th>
                     <th>Otvori / Zatvori</th>
                     
@@ -53,7 +59,6 @@
                         <td>{{ $ticket->contact->email}}</td>
                         <td>{{ $ticket->priority }}</td>
                         <td>{{ $ticket->category->name }}</td>
-                        <td>{{ $ticket->message }}</td>
                         <td>
                         @if($ticket->status == 'Otvoreno')
                             <p class="text-success ">{{ $ticket->status }}</p>
@@ -75,7 +80,10 @@
 
                         <td>
                         <a href="{{ route('ticket_destory', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
-                        </td>                   
+                        </td>
+                        <td>
+                        <a href="{{ route('ticket_show', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
+                        </td>                    
                     </tr>                          
                     @endforeach
                 </table>              

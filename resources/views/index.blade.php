@@ -26,6 +26,7 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
+                
                 <div class="input-group">
                     <form action="{{ route('search') }}" method="GET" role="search">
                         <input type="text" name="search" required/>
