@@ -33,12 +33,12 @@
 
                         <li class="list-group-item">
                         <a class="btn btn-outline-primary rounded-full" 
-                        href="{{ route('ticket_index') }}">Svi zahtjevi</a>
+                        href="{{ route('ticketIndex') }}">Svi zahtjevi</a>
                         </li>
 
                         <li class="list-group-item">
                         <a class="btn btn-outline-secondary rounded-full" 
-                        href="{{ route('ticket_create') }}">Otvaranje novog zahtjeva</a>
+                        href="{{ route('ticketCreate') }}">Otvaranje novog zahtjeva</a>
                         </li>
                     </ul>
 

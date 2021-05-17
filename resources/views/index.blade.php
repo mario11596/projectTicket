@@ -2,13 +2,13 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
             {{ __('Svi kontakti') }}
         </h2>
     </x-slot> 
-    <div class="py-20">
+    <div class="py-20 ">
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>
@@ -26,7 +26,7 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-                
+                <nav class="flex flex-row">
                 <div class="input-group">
                     <form action="{{ route('search') }}" method="GET" role="search">
                         <input type="text" name="search" required/>
@@ -35,7 +35,7 @@
                 </div>
             
              <a href="{{ route('create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dodaj novog</a>
-             
+             </nav>
 
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -53,6 +53,7 @@
                 
                 </tr>
                     @foreach ($contacts as $contact)
+                    @if($contact->user_id == Auth::id())
                     <tr>
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->age }}</td>
@@ -65,18 +66,19 @@
                         <a href="{{ route('edit', $contact->id) }}" class="btn btn-info">Uredi</a>
                         </td>
                         <td>
-                        <a href="{{ route('destory', $contact->id) }}" class="btn btn-danger">Obriši</a>         
+                        <a href="{{ route('destroy', $contact->id) }}" class="btn btn-danger">Obriši</a>         
                         </td>
                         <td>
                         <a href="{{ route('show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
                         </td>
                         <td>
-                        <a href="{{ route('ticket_create_user', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
+                        <a href="{{ route('ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
                         </td>
-                    </tr>                          
+                    </tr>  
+                    @endif                        
                     @endforeach
                 </table>
-               
+              
                 </div>
             </div>
         </div>

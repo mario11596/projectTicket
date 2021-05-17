@@ -27,16 +27,17 @@
                     </div>
                 @endif
 
+            <nav class="flex flex-row">
                 <div class="input-group">
-                    <form action="{{ route('ticket_search') }}" method="GET" role="search">
+                    <form action="{{ route('ticketSearch') }}" method="GET" role="search">
                         <input type="text" name="search" required/>
                         <button type="submit">Pretraži</button>
                     </form>
                 </div>
 
             
-             <a href="{{ route('ticket_create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Otvori novi zahtjev</a>
-
+             <a href="{{ route('ticketCreate') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Otvori novi zahtjev</a>
+            </nav>
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -53,6 +54,7 @@
 
                 </tr>
                     @foreach ($tickets as $ticket)
+                    @if($ticket->user_id == Auth::id())
                     <tr>
                         <td>{{ $ticket->title }}</td>
                         <td>{{  $ticket->contact->name}} </td>
@@ -70,21 +72,22 @@
 
                         @if($ticket->status == 'Otvoreno')
                             <td>
-                            <a href="{{ route('ticket_close', $ticket->id) }}" class="btn btn-warning">Zatvori zahtjev</a>
+                            <a href="{{ route('ticketClose', $ticket->id) }}" class="btn btn-warning">Zatvori zahtjev</a>
                             </td>          
                         @else 
                             <td>
-                            <a href="{{ route('ticket_open', $ticket->id) }}" class="btn btn-success">Otvori zahtjev</a>
+                            <a href="{{ route('ticketOpen', $ticket->id) }}" class="btn btn-success">Otvori zahtjev</a>
                             </td>                        
                         @endif 
 
                         <td>
-                        <a href="{{ route('ticket_destory', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
+                        <a href="{{ route('ticketDestroy', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
                         </td>
                         <td>
-                        <a href="{{ route('ticket_show', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
+                        <a href="{{ route('ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
                         </td>                    
-                    </tr>                          
+                    </tr>
+                    @endif                          
                     @endforeach
                 </table>              
                 </div>

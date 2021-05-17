@@ -12,26 +12,22 @@ use App\Models\User;
 
 class TicketsController extends Controller
 {
-   public function ticket_index(){  
+   public function ticketIndex(){  
        
-       /* $id = Auth::id();
-        $tickets = Ticket::select()->where('user_id', $id)->get();
-  
-      return view('tickets.index', compact('tickets'));*/
+        $id = Auth::id();
+        $tickets = Ticket::select()->where('user_id', $id)->get()->load("contact")->sortBy('status');
 
-      $id = Auth::id();
-      $tickets = Ticket::select()->where('user_id', $id)->get()->load("contact");
-      return view('tickets.index', compact('tickets'));
+        return view('tickets.index', compact('tickets'));
     }
 
-    public function ticket_create(){ //novi kontakt
+    public function ticketCreate(){
 
         $categories = Category::all();
 
         return view('tickets.create', compact('categories'));
     }
 
-    public function ticket_store(Request $request){ 
+    public function ticketStore(Request $request){ 
 
         $user_id = Auth::id();
 
@@ -40,10 +36,10 @@ class TicketsController extends Controller
             'title' => 'required',
             'priority' => 'required',
             'message' => 'required', 
-            'name_contact' => 'required'
+            'nameContact' => 'required'
         ]);
-        //autokomplit pogledati
-        $find_id = Contact::where('name', "=", $request->name_contact)->pluck('id')->first();
+        
+        $find_id = Contact::where('name', "=", $request->nameContact)->pluck('id')->first();
 
     
         $contact = Contact::findorFail($find_id);
@@ -65,14 +61,14 @@ class TicketsController extends Controller
         $ticket->save();
         return redirect('/ticket')->with('success', 'Uspješno je spremljen novi zahtjev');
     }
-    public function ticket_close($id){
+    public function ticketClose($id){
         $ticket = Ticket::where('id',$id)->firstOrFail();
         $ticket->status = "Zatvoreno";
         $ticket->save();
 
         return redirect('/ticket')->with('warning', 'Uspješno je zatvoren zahtjev korisnika ' );  
     }
-    public function ticket_open($id){
+    public function ticketOpen($id){
         $ticket = Ticket::where('id',$id)->firstOrFail();
         $ticket->status = "Otvoreno";
         $ticket->save();
@@ -80,31 +76,35 @@ class TicketsController extends Controller
         return redirect('/ticket')->with('warning', 'Uspješno je ponovno otvoren zahtjev korisnika ' );  
     }
  
-    public function ticket_destory(Ticket $ticket){
+    public function ticketDestroy(Ticket $ticket){
         $ticket->delete();
 
         return redirect('/ticket')->with('warning', 'Uspješno je izbrisan zahtjev korisnika');
     }
 
-    public function ticket_create_user($name){ //novi kontakt
-
-        //$name = $name;
-
+    public function ticketCreateUser($name){ 
         $categories = Category::all();
 
         return view('tickets.create', compact('categories', 'name'));
     }
 
-    public function ticket_search(Request $request){
+    public function ticketSearch(Request $request){
         $search = $request->input('search');
    
         $tickets = Ticket::query()
                     ->where('title', 'LIKE', "%{$search}%")
                     ->get();
-        return view('tickets.index', compact('tickets'));
+
+        if(count($tickets) > 0){
+            return view('tickets.index', compact('tickets'));
+        } else {
+             return redirect('/ticket')->with('warning', 'Nema traženog zahtjeva!');
+        }
+        
+        //return view('tickets.index', compact('tickets'));
     }
 
-    public function ticket_show($id){ 
+    public function ticketShow($id){ 
         $ticket = Ticket::where('id', $id)->first();
 
         return view('tickets.show', compact('ticket'));

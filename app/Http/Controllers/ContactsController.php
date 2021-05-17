@@ -62,9 +62,6 @@ class ContactsController extends Controller{
         }
         return view('edit', compact('contact'));
 
-
-        /*$contact = Contact::find($id);
-        return view('edit', compact('contact'));*/
     }
 
     public function update(Request $request,$id){ //spremiti promjene kontakt
@@ -97,14 +94,9 @@ class ContactsController extends Controller{
         return redirect('/contact')->with('info', 'Uspješno je ažuriran kontakt');
     }
 
-    public function destory($id){ //brisanje kontakata
-      
-     
-           // $contact->delete();
-            //return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
-
+    public function destroy($id){ //brisanje kontakata
         $check_id_date = Ticket::where('contact_id', $id)->get();
-       // error_log($check_id_date);
+       
 
         if(count($check_id_date) > 0){
             return redirect('/contact')->with('warning', 'Kontakt ima zahtjev, nemožete ga obrisati');
@@ -112,13 +104,15 @@ class ContactsController extends Controller{
             Contact::where('id',$id)->delete();
             return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
         }
-        
+  
     }
 
-    public function show(Contact $contact){ //pokazuje specificirano
-        
+    public function show($id){ //pokazuje specificirano
+        $number = 0;
+        $contact = Contact::where('id',$id)->first();
+        $tickets = Ticket::where('contact_id',$id)->get();
 
-        return view('show', compact('contact'));
+        return view('show', compact('contact','tickets','number'));
     }
     //tražilica
     public function search(Request $request){
@@ -129,7 +123,12 @@ class ContactsController extends Controller{
                     ->where('name', 'LIKE', "%{$search}%")
                     ->orWhere('email', 'LIKE', "%{$search}%")
                     ->get();
-        return view('index', compact('contacts'));
+
+        if(count($contacts) > 0){
+            return view('index', compact('contacts'));
+        } else {
+            return redirect('/contact')->with('warning', 'Nema traženog korisnika!');
+        }
     }
 
 

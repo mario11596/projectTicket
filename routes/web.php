@@ -21,10 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');*/
-
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -36,22 +32,19 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/contact/{contact}/show', [ContactsController::class, 'show'])->name('show');
     Route::get('/contact/{contact}/edit', [ContactsController::class, 'edit'])->name('edit');
     Route::post('/contact/{contact}', [ContactsController::class, 'update'])->name('update');
-    Route::get('/contact/{contact}', [ContactsController::class, 'destory'])->name('destory');
+    Route::get('/contact/{contact}', [ContactsController::class, 'destroy'])->name('destroy');
     Route::get('/search', [ContactsController::class, 'search'])->name('search');
 
     
-    Route::get('/searchTicket', [TicketsController::class, 'ticket_search'])->name('ticket_search');
-    Route::get('/ticket/{ticket}/show', [TicketsController::class, 'ticket_show'])->name('ticket_show');
-
-    Route::get('/ticket/create/{name}', [TicketsController::class, 'ticket_create_user'])->name('ticket_create_user');
-    Route::get('/ticket', [TicketsController::class, 'ticket_index'])->name('ticket_index');
-    Route::post('/ticket', [TicketsController::class, 'ticket_store'])->name('ticket_store');
-    Route::get('/ticket/create', [TicketsController::class, 'ticket_create'])->name('ticket_create');
-    Route::get('/ticket/{ticket}/close', [TicketsController::class, 'ticket_close'])->name('ticket_close');
-    Route::get('/ticket/{ticket}/open', [TicketsController::class, 'ticket_open'])->name('ticket_open');
-    Route::get('/ticket/{ticket}', [TicketsController::class, 'ticket_destory'])->name('ticket_destory');
-
-   
+    Route::get('/searchTicket', [TicketsController::class, 'ticketSearch'])->name('ticketSearch');
+    Route::get('/ticket/{ticket}/show', [TicketsController::class, 'ticketShow'])->name('ticketShow');
+    Route::get('/ticket/create/{name}', [TicketsController::class, 'ticketCreateUser'])->name('ticketCreateUser');
+    Route::get('/ticket', [TicketsController::class, 'ticketIndex'])->name('ticketIndex');
+    Route::post('/ticket', [TicketsController::class, 'ticketStore'])->name('ticketStore');
+    Route::get('/ticket/create', [TicketsController::class, 'ticketCreate'])->name('ticketCreate');
+    Route::get('/ticket/{ticket}/close', [TicketsController::class, 'ticketClose'])->name('ticketClose');
+    Route::get('/ticket/{ticket}/open', [TicketsController::class, 'ticketOpen'])->name('ticketOpen');
+    Route::get('/ticket/{ticket}', [TicketsController::class, 'ticketDestroy'])->name('ticketDestroy');
 });
 
 

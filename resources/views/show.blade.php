@@ -84,7 +84,56 @@
                                 {{ $contact->updated_at}} 
                             </div>
                         </div>
+                        
+                        @foreach($tickets as $ticket)
+                            @if($ticket->contact_id == $contact->id)
+                                <div class="py-9">
+                                    <div class="card ">
+                                        <div class="card-header">
+                                            <div class="form-group">
+                                                <strong>Naslov zahtjeva:</strong>
+                                                {{ $ticket->title }}
+                                            </div>
+                                        </div>
 
+                                        <div class="card-body">
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <strong>Broj zahtjeva:</strong>
+                                                {{ $number = $number + 1}}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <strong>Vrsta zahtjeva:</strong>
+                                                {{ $ticket->category->name }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <strong>Status zahtjeva:</strong>
+                                                @if($ticket->status == 'Otvoreno')
+                                                    <p class="text-danger">{{ $ticket->status }}</p>
+                                                @else
+                                                    <p class="text-warning">{{ $ticket->status }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                            <div class="form-group">
+                                                <strong>Zatraženi zahtjev:</strong>
+                                                {{ $ticket->message }} 
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            @endif
+                        @endforeach               
                 
                     </div>
 

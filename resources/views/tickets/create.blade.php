@@ -3,7 +3,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Novi ticket') }}
+            {{ __('Novi zahtjev') }}
         </h2>
     </x-slot>
 
@@ -24,7 +24,7 @@
                 @endif
 
 
-                <form action="{{ route('ticket_store') }}" method="POST" >
+                <form action="{{ route('ticketStore') }}" method="POST" >
                  @csrf
 
                  <div class="row">
@@ -68,7 +68,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                          <div class="form-group">
                             <strong>Korisnik:</strong>
-                            <input type="text" name="name_contact" class="form-control" value="{{ $name ?? ' ' }}">
+                            <input type="text" name="nameContact" class="form-control" value="{{ $name ?? ' ' }}">
                         </div>
                     </div>
                 </div>
