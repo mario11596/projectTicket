@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\UserController;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/dashboard', [UserController::class, 'userIndex'])->name('dashboard');
+
 
     Route::get('/contact', [ContactsController::class, 'index'])->name('index');
     Route::post('/contact', [ContactsController::class, 'store'])->name('store');

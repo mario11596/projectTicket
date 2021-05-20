@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -15,6 +15,19 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                        {{ __('Svi kontakti') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                        {{ __('Novi kontakt') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ticketIndex')" :active="request()->routeIs('ticketIndex')">
+                        {{ __('Svi zahtjevi') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('ticketCreate')" :active="request()->routeIs('ticketCreate')">
+                        {{ __('Novi zahtjev') }}
+                    </x-nav-link>
+                    
                 </div>
             </div>
 

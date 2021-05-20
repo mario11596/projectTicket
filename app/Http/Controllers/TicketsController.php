@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewTicketEvent;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Mail\MyMail;
+
 use App\Models\Ticket;
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends Controller
 {
    public function ticketIndex(){  
        
         $id = Auth::id();
-        $tickets = Ticket::select()->where('user_id', $id)->get()->load("contact")->sortBy('status');
+        $tickets = Ticket::select()->where('user_id', $id)->paginate(5);
 
         return view('tickets.index', compact('tickets'));
     }
@@ -59,6 +64,10 @@ class TicketsController extends Controller
         $ticket->user_id = $user_id;
 
         $ticket->save();
+
+
+        event(new NewTicketEvent($ticket));
+        
         return redirect('/ticket')->with('success', 'Uspješno je spremljen novi zahtjev');
     }
     public function ticketClose($id){
@@ -89,14 +98,18 @@ class TicketsController extends Controller
     }
 
     public function ticketSearch(Request $request){
-        $search = $request->input('search');
+        $search = $request->input('search') ?: "";
    
         $tickets = Ticket::query()
-                    ->where('title', 'LIKE', "%{$search}%")
-                    ->get();
+                    ->where('user_id', Auth::id())
+                    ->where(function(Builder $builder) use ($search){
+                    $builder->where('title', 'LIKE', "%{$search}%");
+                    })
+                    ->orderBy('id')
+                    ->paginate(5);
 
         if(count($tickets) > 0){
-            return view('tickets.index', compact('tickets'));
+            return view('tickets.index', compact('tickets', 'search'));
         } else {
              return redirect('/ticket')->with('warning', 'Nema traženog zahtjeva!');
         }

@@ -7,7 +7,7 @@
         </h2>
     </x-slot> 
     <div class="py-20 ">
-
+    
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -29,6 +29,7 @@
                 <nav class="flex flex-row">
                 <div class="input-group">
                     <form action="{{ route('search') }}" method="GET" role="search">
+              
                         <input type="text" name="search" required/>
                         <button type="submit">Pretraži</button>
                     </form>
@@ -36,12 +37,14 @@
             
              <a href="{{ route('create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Dodaj novog</a>
              </nav>
-
-
+           
+            
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                 <table class="table table-bordered table-responsive-lg table table-stripe">
+                
                 <tr>
+                
                     <th>Ime i prezime</th>
                     <th>Godine starosti</th>
                     <th>Adresa stanovanja</th>
@@ -53,7 +56,7 @@
                 
                 </tr>
                     @foreach ($contacts as $contact)
-                    @if($contact->user_id == Auth::id())
+                  
                     <tr>
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->age }}</td>
@@ -75,10 +78,10 @@
                         <a href="{{ route('ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
                         </td>
                     </tr>  
-                    @endif                        
+                                    
                     @endforeach
                 </table>
-              
+                 {{isset($search)? $contacts->appends(['search'=> $search])->links() : $contacts->links()}}                
                 </div>
             </div>
         </div>

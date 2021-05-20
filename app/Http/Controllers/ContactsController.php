@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Contact;
 use App\Models\Ticket;
+use Illuminate\Database\Eloquent\Builder;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -16,7 +17,7 @@ class ContactsController extends Controller{
     public function index(){  //izlistava sve
        
       $id = Auth::id();
-      $contacts = Contact::select()->where('user_id', $id)->get();
+      $contacts = Contact::select()->where('user_id', $id)->paginate(5);
 
     return view('index', compact('contacts'));
     }
@@ -116,16 +117,19 @@ class ContactsController extends Controller{
     }
     //tražilica
     public function search(Request $request){
-        $search = $request->input('search');
-   
+        $search = $request->input('search') ?: "";
 
         $contacts = Contact::query()
-                    ->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('email', 'LIKE', "%{$search}%")
-                    ->get();
-
-        if(count($contacts) > 0){
-            return view('index', compact('contacts'));
+        ->where('user_id', Auth::id())
+        ->where(function(Builder $builder) use ($search){
+            $builder->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('email', 'LIKE', "%{$search}%");
+        })
+        ->orderBy('id')
+        ->paginate(5);
+        
+      if(count($contacts) > 0){
+            return view('index', compact('contacts','search'));
         } else {
             return redirect('/contact')->with('warning', 'Nema traženog korisnika!');
         }

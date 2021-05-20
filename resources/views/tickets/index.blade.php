@@ -54,7 +54,6 @@
 
                 </tr>
                     @foreach ($tickets as $ticket)
-                    @if($ticket->user_id == Auth::id())
                     <tr>
                         <td>{{ $ticket->title }}</td>
                         <td>{{  $ticket->contact->name}} </td>
@@ -86,10 +85,10 @@
                         <td>
                         <a href="{{ route('ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
                         </td>                    
-                    </tr>
-                    @endif                          
+                    </tr>                        
                     @endforeach
-                </table>              
+                </table> 
+                    {{isset($search)? $tickets->appends(['search'=> $search])->links() : $tickets->links()}}       
                 </div>
             </div>
         </div>
