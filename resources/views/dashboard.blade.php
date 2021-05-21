@@ -78,10 +78,40 @@
         </div>
         </section>
         </div>
-        
-        <footer class="px-6 py-2 bg-white text-black text-center ">
-            <p class="py-2 text-gray-800 dark:text-white sm:py-0">@All rights reserved by Tvrtka d.o.o</p>
-        </footer>
+    
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <div id="piechart" style="width: 1000px; height: 500px;" class="max-w-7xl mx-auto sm:px-6 lg:px-8""></div>
+            <script type="text/javascript">
+            var proposalTicket = <?php echo json_encode($proposalTicket); ?>;
+            var complaintTicket = <?php echo json_encode($complaintTicket); ?>;
+            var complaintHardTicket = <?php echo json_encode($complaintHardTicket); ?>;
+
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Category', 'Count from Sum'],
+                ['Pritužba', complaintTicket],
+                ['Prijedlog', proposalTicket],
+                ['Žalba', complaintHardTicket]
+            ]);
+
+            var options = {
+                title: 'Pregled zahtjeva po kategorijama'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+            }
+        </script>
+        <div class="py-12"> 
+            <footer class="px-6 py-2 bg-white text-black text-center ">
+                <p class="py-2 text-gray-800 dark:text-white sm:py-0">@All rights reserved by Tvrtka d.o.o</p>
+            </footer>
+        </div>
 
         </div>
     </div>

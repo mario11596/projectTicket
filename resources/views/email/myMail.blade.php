@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
     <title>Potvrda o primljenom zahtjevu</title>
 </head>
 <body>
-    <p>Zahtjev za vašeg korisnika {{$ticket->contact_id->name}} je uspješno primljen te će se obraditi u najkraćem roku</p>
+    <p>Zahtjev za Vašeg korisnika {{ $ticket->contact->name}} je uspješno primljen te će se obraditi u najkraćem roku</p>
         <p>Podaci:</p>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -21,34 +22,20 @@
                     <div class="form-group">
                         <strong>Ime i prezime korisnika:</strong>
                             {{ $ticket->contact->name}}
-                    </div>
+                        </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>E-mail adresa:</strong>
+                         <strong>E-mail adresa:</strong>
                             {{ $ticket->contact->email}}
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Adresa stanovanja:</strong>
-                            {{ $ticket->contact->address}}
-                    </div>
-                </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Razina prioriteta:</strong>
                             {{ $ticket->priority }}
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Vrsta zahtjeva:</strong>
-                            {{ $ticket->category->name }}
                     </div>
                 </div>
 

@@ -7,10 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-use App\Models\Ticket;
-use App\Listeners\NewTicketListener;
-
-class MyMail extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -22,7 +19,7 @@ class MyMail extends Mailable
      */
     public function __construct($ticket)
     {
-       $this->ticket = $ticket;
+        $this->ticket = $ticket;
     }
 
     /**
@@ -32,8 +29,8 @@ class MyMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Uspješno je primljen novi zahtjev')
-                    ->view('email.myMail')
+        return $this->subject('Uspješno obrađen zahtjev')
+                    ->markdown('email.contactMail')
                     ->with('ticket', $this->ticket);
     }
 }

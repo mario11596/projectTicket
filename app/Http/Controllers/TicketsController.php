@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CloseTicketEvent;
 use App\Events\NewTicketEvent;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -66,14 +67,16 @@ class TicketsController extends Controller
         $ticket->save();
 
 
-        event(new NewTicketEvent($ticket));
-        
+        event(new NewTicketEvent($ticket)); //user
+      
         return redirect('/ticket')->with('success', 'Uspješno je spremljen novi zahtjev');
     }
     public function ticketClose($id){
         $ticket = Ticket::where('id',$id)->firstOrFail();
         $ticket->status = "Zatvoreno";
         $ticket->save();
+
+        event(new CloseTicketEvent($ticket)); //kontakt
 
         return redirect('/ticket')->with('warning', 'Uspješno je zatvoren zahtjev korisnika ' );  
     }

@@ -2,16 +2,14 @@
 
 namespace App\Listeners;
 
+use App\Events\CloseTicketEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
-
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MyMail;
-use App\Events\NewTicketEvent;
-
+use App\Mail\ContactMail;
 use App\Models\Ticket;
 
-class NewTicketListener
+class CloseTicketListener
 {
     /**
      * Create the event listener.
@@ -26,13 +24,13 @@ class NewTicketListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param  CloseTicketEvent  $event
      * @return void
      */
-    public function handle(NewTicketEvent $event)
+    public function handle(CloseTicketEvent $event)
     {
-        Mail::to('mario.negovetic1@gmail.com')
-                ->cc($event->ticket->contact->email)
-                ->send(new MyMail($event->ticket));
+        Mail::to($event->ticket->contact->email)
+                ->cc('mario.negovetic1@gmail.com')
+                ->send(new ContactMail($event->ticket));
     }
 }
