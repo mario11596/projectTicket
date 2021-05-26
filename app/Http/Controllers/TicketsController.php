@@ -39,9 +39,9 @@ class TicketsController extends Controller
 
         $request->validate([
             'category' => 'required',
-            'title' => 'required',
+            'title' => 'required|max:30',
             'priority' => 'required',
-            'message' => 'required', 
+            'message' => 'required|min:10|max:70', 
             'nameContact' => 'required'
         ]);
         
@@ -54,7 +54,6 @@ class TicketsController extends Controller
             return redirect('/ticket')->with('info', 'Nemate pristup otvaranju zahtjeva zadanom klijentu!');
         }
         
-       
         $ticket = new Ticket();
         $ticket->category_id = request('category');
         $ticket->contact_id = $find_id;

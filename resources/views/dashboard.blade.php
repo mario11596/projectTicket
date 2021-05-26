@@ -1,21 +1,31 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-<x-app-layout>
+<x-app-layout >
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Upravljačka ploča') }}
-            <div> {{ Auth::user()->name }}</div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+            {{ __('Upravljačka ploča') }} -> {{ Auth::user()->name }}
         </h2>
-    </x-slot>
 
-    <div class="py-12">
+        <div class="flex justify-end ">
+            
+            <a href="https://mailtrap.io/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16" >
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+            </svg>
+            </a>
+        </div>
+
+    </x-slot>
+    
+
+    <div class="py-12 bg-gray-200" >
     
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
         <div class="row ">
             <div class="col-sm-6 ">
-                <div class="card p-3 mb-2 rounded-lg bg-indigo-100">
+                <div class="card p-3 mb-2 rounded-lg bg-yellow-100">
                     <div class="card-body ">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Kontakti</h5>
                         <p class="card-text">Ukupan broj kontakata: {{ $sumContactsAll }} </p>
@@ -26,7 +36,7 @@
             </div>
 
             <div class="col-sm-6">
-                <div class="card p-2 mb-2 rounded-lg bg-indigo-100">
+                <div class="card p-2 mb-2 rounded-lg bg-yellow-100">
                     <div class="card-body">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Zahtjevi</h5>
                         <p class="card-text">Trenutan broj zahtjeva:  {{ $sumTickets}}</p>
@@ -38,7 +48,7 @@
             </div>
         </div>    
         <div class="py-12"> 
-        <section class="bg-white dark:bg-gray-800 ">
+        <section class="bg-white dark:bg-gray-800 rounded-lg">
         <div class="container px-6 py-8 mx-auto ">
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div class="p-3 mb-2 bg-info text-dark rounded-lg">
@@ -80,7 +90,7 @@
         </div>
     
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <div id="piechart" style="width: 1000px; height: 500px;" class="max-w-7xl mx-auto sm:px-6 lg:px-8""></div>
+            <div id="piechart_3d" style="width: 1000px; height: 500px;" class="max-w-7xl mx-auto sm:px-6 lg:px-8""></div>
             <script type="text/javascript">
             var proposalTicket = <?php echo json_encode($proposalTicket); ?>;
             var complaintTicket = <?php echo json_encode($complaintTicket); ?>;
@@ -99,16 +109,17 @@
             ]);
 
             var options = {
-                title: 'Pregled zahtjeva po kategorijama'
+                title: 'Pregled zahtjeva po kategorijama',
+                is3D: true,
             };
 
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
 
             chart.draw(data, options);
             }
         </script>
-        <div class="py-12"> 
-            <footer class="px-6 py-2 bg-white text-black text-center ">
+        <div class="py-12 "> 
+            <footer class="px-6 py-2 bg-white text-black text-center rounded-lg">
                 <p class="py-2 text-gray-800 dark:text-white sm:py-0">@All rights reserved by Tvrtka d.o.o</p>
             </footer>
         </div>

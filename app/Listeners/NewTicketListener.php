@@ -31,8 +31,8 @@ class NewTicketListener
      */
     public function handle(NewTicketEvent $event)
     {
-        Mail::to('mario.negovetic1@gmail.com')
-                ->cc($event->ticket->contact->email)
-                ->send(new MyMail($event->ticket));
+        Mail::cc($event->ticket->contact->email)
+            ->send(new MyMail($event->ticket));
+            
     }
 }

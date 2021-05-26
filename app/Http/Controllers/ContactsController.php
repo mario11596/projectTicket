@@ -19,12 +19,12 @@ class ContactsController extends Controller{
       $id = Auth::id();
       $contacts = Contact::select()->where('user_id', $id)->paginate(5);
 
-    return view('index', compact('contacts'));
+    return view('contacts.index', compact('contacts'));
     }
 
     public function create(){ //novi kontakt
 
-        return view('create');
+        return view('contacts.create');
     }
 
     public function store(Request $request){ //spremamo novi kontakt
@@ -32,11 +32,11 @@ class ContactsController extends Controller{
         $user_id = Auth::id();
 
         $request->validate([
-            'name' => 'required',
-            'age' => 'required',
+            'name' => 'required|alpha|max:30',
+            'age' => 'required|integer|min:18',
             'address' => 'required',
             'mobile' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:contacts,email',
             'currentaccountbalance' => 'required',
             'credit' => 'required',
         ]);
@@ -61,7 +61,7 @@ class ContactsController extends Controller{
         if($contact->user_id != Auth::id()){
             return redirect('/contact');
         }
-        return view('edit', compact('contact'));
+        return view('contacts.edit', compact('contact'));
 
     }
 
@@ -71,11 +71,11 @@ class ContactsController extends Controller{
         $contact = Contact::where("id","=",$id)->get()->first();
 
         $request->validate([
-            'name' => 'required',
-            'age' => 'required',
+            'name' => 'required|alpha|max:30',
+            'age' => 'required|integer|min:18',
             'address' => 'required',
             'mobile' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'currentaccountbalance' => 'required',
             'credit' => 'required',
         ]);
@@ -113,7 +113,7 @@ class ContactsController extends Controller{
         $contact = Contact::where('id',$id)->first();
         $tickets = Ticket::where('contact_id',$id)->get();
 
-        return view('show', compact('contact','tickets','number'));
+        return view('contacts.show', compact('contact','tickets','number'));
     }
     //tražilica
     public function search(Request $request){
@@ -129,7 +129,7 @@ class ContactsController extends Controller{
         ->paginate(5);
         
       if(count($contacts) > 0){
-            return view('index', compact('contacts','search'));
+            return view('contacts.index', compact('contacts','search'));
         } else {
             return redirect('/contact')->with('warning', 'Nema traženog korisnika!');
         }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Contact;
 use App\Models\User;
 use App\Models\Ticket;
@@ -26,11 +27,11 @@ class TicketFactory extends Factory
         return [
             'user_id' => User::all()->random()->id,
             'contact_id' => Contact::all()->random()->id,
-            'category_id' => Contact::all()->random()->id,
-            'title' => $this->faker->title(),
-            'priority' => $this->faker->priority(),
-            'message' => $this->faker->message(),
-            'status' => $this->faker->status()
+            'category_id' => Category::all()->random()->id,
+            'title' => $this->faker->sentence(),
+            'priority' => $this->faker->randomElement(['Nije hitno','Može pričekati', 'Požuriti', 'Hitno']),
+            'message' => $this->faker->text(),
+            'status' => $this->faker->word(),
         ];
     }
 }

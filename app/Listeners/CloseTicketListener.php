@@ -30,7 +30,7 @@ class CloseTicketListener
     public function handle(CloseTicketEvent $event)
     {
         Mail::to($event->ticket->contact->email)
-                ->cc('mario.negovetic1@gmail.com')
+                ->cc('tvrtka@gmail.com')
                 ->send(new ContactMail($event->ticket));
     }
 }

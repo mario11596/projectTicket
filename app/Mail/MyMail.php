@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Models\Ticket;
 use App\Listeners\NewTicketListener;
+use App\Models\User;
 
 class MyMail extends Mailable
 {
@@ -32,7 +33,12 @@ class MyMail extends Mailable
      */
     public function build()
     {
+        $user = User::findOrFail($this->ticket->user_id);
+        $user_email = $user->email;
+
         return $this->subject('Uspješno je primljen novi zahtjev')
+                    ->from('tvrtka@gmail.com')
+                    ->to($user_email)
                     ->view('email.myMail')
                     ->with('ticket', $this->ticket);
     }
