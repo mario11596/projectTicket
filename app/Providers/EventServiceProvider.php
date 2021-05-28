@@ -13,6 +13,7 @@ use App\Events\NewTicketEvent;
 use App\Listeners\CloseTicketListener;
 use App\Events\CloseTicketEvent;
 
+
 class EventServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +28,7 @@ class EventServiceProvider extends ServiceProvider
 
         NewTicketEvent::class => [
             NewTicketListener::class,
+        
         ],
         CloseTicketEvent::class => [
             CloseTicketListener::class,

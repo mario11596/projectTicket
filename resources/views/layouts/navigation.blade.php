@@ -29,6 +29,9 @@
                     <x-nav-link :href="route('tickets.ticketCreate')" :active="request()->routeIs('tickets.ticketCreate')">
                         {{ __('Novi zahtjev') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('notifications.notificationIndex')" :active="request()->routeIs('notifications.notificationIndex')">
+                        {{ __('Obavijesti') }}
+                    </x-nav-link>
                     
                 </div>
             </div>

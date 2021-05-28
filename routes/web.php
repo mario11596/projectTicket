@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificationsController;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +48,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/ticket/{ticket}/close', [TicketsController::class, 'ticketClose'])->name('tickets.ticketClose');
     Route::get('/ticket/{ticket}/open', [TicketsController::class, 'ticketOpen'])->name('tickets.ticketOpen');
     Route::get('/ticket/{ticket}', [TicketsController::class, 'ticketDestroy'])->name('tickets.ticketDestroy');
+
+    Route::get('/notifications', [NotificationsController::class, 'notificationIndex'])->name('notifications.notificationIndex');
+    Route::get('/notifications/mark', [NotificationsController::class, 'notificationMark'])->name('notifications.notificationMark');
+
+    
 });
 
 

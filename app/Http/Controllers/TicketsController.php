@@ -85,8 +85,8 @@ class TicketsController extends Controller
         return redirect('/ticket')->with('warning', 'Uspješno je ponovno otvoren zahtjev korisnika ' );  
     }
  
-    public function ticketDestroy(Ticket $ticket){
-        $ticket->delete();
+    public function ticketDestroy($id){
+        Ticket::where('id',$id)->delete();
 
         return redirect('/ticket')->with('warning', 'Uspješno je izbrisan zahtjev korisnika');
     }

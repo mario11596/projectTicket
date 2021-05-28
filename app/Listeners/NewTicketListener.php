@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MyMail;
 use App\Events\NewTicketEvent;
 
+use Illuminate\Support\Facades\Notification;
+
 use App\Models\Ticket;
+use App\Models\User;
+use App\Notifications\NewTicketNotification;
+
 
 class NewTicketListener
 {
@@ -33,6 +38,10 @@ class NewTicketListener
     {
         Mail::cc($event->ticket->contact->email)
             ->send(new MyMail($event->ticket));
-            
+        
+        $user = User::findOrFail($event->ticket->user_id);
+
+        Notification::send($user, new NewTicketNotification($event->ticket));
+       
     }
 }
