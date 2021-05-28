@@ -12,9 +12,9 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-red-100">
+    <div class="py-12 bg-red-100" style="height: 86%;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('index') }}" class="btn btn-warning">Vrati se natrag</a>
+        <a href="{{ route('contacts.index') }}" class="btn btn-warning">Vrati se natrag</a>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
@@ -29,12 +29,12 @@
                 @endif
 
 
-                <form action="{{ route('ticketStore') }}" method="POST" >
+                <form action="{{ route('tickets.ticketStore') }}" method="POST" >
                  @csrf
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div class="form-group">
+                        <div class="form-group">
                             <strong>Kategorija:</strong>
                                 <select id="category" type="category" class="form-control" name="category">
                                     <option value="">Vrsta zahtjeva: </option>
@@ -44,57 +44,47 @@
                                 </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                         
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div class="form-group">
+                        <div class="form-group">
                             <strong>Prioritet zahtjeva:</strong>
                                 <select id="priority" type="" class="form-control" name="priority">
-                                  <option value="">Vrsta prioriteta</option>
+                                    <option value="">Vrsta prioriteta</option>
                                     <option value="nije_hitno">Nije hitno</option>
-                                  <option value="moze_pricekati">Može pričekati</option>
-                                  <option value="pozuriti">Požurit</option>
-                                  <option value="hitno">Hitno</option>
+                                    <option value="moze_pricekati">Može pričekati</option>
+                                    <option value="pozuriti">Požurit</option>
+                                    <option value="hitno">Hitno</option>
                                 </select>
                         </div>
                     </div>
-                </div>
-                 
-                <div class="row">
+           
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                         <div class="form-group">
+                        <div class="form-group">
                             <strong>Naslov:</strong>
                             <input type="text" name="title" class="form-control" placeholder="naslov">
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
+                             
                     <div class="col-xs-12 col-sm-12 col-md-12">
                          <div class="form-group">
                             <strong>Korisnik:</strong>
                             <input type="text" name="nameContact" class="form-control" value="{{ $name ?? ' ' }}">
                         </div>
                     </div>
-                </div>
-
                 
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Tekst zahtjeva:</strong>
+                            <textarea type="text" name="message"  class="form-control" placeholder="zahtjev"></textarea>
+                        </div>
+                    </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                         <strong>Tekst poruke:</strong>
-                        <textarea type="text" name="message"  class="form-control" placeholder="tekst poruke"></textarea>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Spremi</button>
                     </div>
                 </div>
-
-
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Spremi</button>
-                </div>
-
-                </div>
                 </form>           
-              </div>
+                </div>
             </div>
         </div>
     </div>

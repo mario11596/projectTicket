@@ -17,16 +17,16 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
                         {{ __('Svi kontakti') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
+                    <x-nav-link :href="route('contacts.create')" :active="request()->routeIs('contacts.create')">
                         {{ __('Novi kontakt') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('ticketIndex')" :active="request()->routeIs('ticketIndex')">
+                    <x-nav-link :href="route('tickets.ticketIndex')" :active="request()->routeIs('tickets.ticketIndex')">
                         {{ __('Svi zahtjevi') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('ticketCreate')" :active="request()->routeIs('ticketCreate')">
+                    <x-nav-link :href="route('tickets.ticketCreate')" :active="request()->routeIs('tickets.ticketCreate')">
                         {{ __('Novi zahtjev') }}
                     </x-nav-link>
                     

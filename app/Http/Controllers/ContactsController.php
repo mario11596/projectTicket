@@ -3,36 +3,32 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
-
 use App\Models\Contact;
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Builder;
-
 use function PHPUnit\Framework\isEmpty;
 
 class ContactsController extends Controller{
 
-    public function index(){  //izlistava sve
+    public function index(){  
        
-      $id = Auth::id();
-      $contacts = Contact::select()->where('user_id', $id)->paginate(5);
+        $id = Auth::id();
+        $contacts = Contact::select()->where('user_id', $id)->paginate(5);
 
-    return view('contacts.index', compact('contacts'));
+        return view('contacts.index', compact('contacts'));
     }
 
-    public function create(){ //novi kontakt
+    public function create(){ 
 
         return view('contacts.create');
     }
 
-    public function store(Request $request){ //spremamo novi kontakt
+    public function store(Request $request){ 
 
         $user_id = Auth::id();
 
         $request->validate([
-            'name' => 'required|alpha|max:30',
+            'name' => 'required|max:30',
             'age' => 'required|integer|min:18',
             'address' => 'required',
             'mobile' => 'required',
@@ -55,23 +51,22 @@ class ContactsController extends Controller{
         return redirect('/contact')->with('success', 'Uspješno je spremljen novi kontakt');
     }
     
-    public function edit($id){ //uređivanje kontakta
+    public function edit($id){
         $contact = Contact::findorFail($id);
 
         if($contact->user_id != Auth::id()){
             return redirect('/contact');
         }
         return view('contacts.edit', compact('contact'));
-
     }
 
-    public function update(Request $request,$id){ //spremiti promjene kontakt
+    public function update(Request $request,$id){ 
 
         $user_id = Auth::id();
         $contact = Contact::where("id","=",$id)->get()->first();
 
         $request->validate([
-            'name' => 'required|alpha|max:30',
+            'name' => 'required',
             'age' => 'required|integer|min:18',
             'address' => 'required',
             'mobile' => 'required',
@@ -91,31 +86,28 @@ class ContactsController extends Controller{
     
         $contact->save();
 
-        //return redirect('/contact');
         return redirect('/contact')->with('info', 'Uspješno je ažuriran kontakt');
     }
 
-    public function destroy($id){ //brisanje kontakata
+    public function destroy($id){ 
         $check_id_date = Ticket::where('contact_id', $id)->get();
        
-
         if(count($check_id_date) > 0){
             return redirect('/contact')->with('warning', 'Kontakt ima zahtjev, nemožete ga obrisati');
         } else {
             Contact::where('id',$id)->delete();
             return redirect('/contact')->with('warning', 'Uspješno je izbrisan kontakt');
         }
-  
     }
 
-    public function show($id){ //pokazuje specificirano
+    public function show($id){ 
         $number = 0;
         $contact = Contact::where('id',$id)->first();
         $tickets = Ticket::where('contact_id',$id)->get();
 
         return view('contacts.show', compact('contact','tickets','number'));
     }
-    //tražilica
+    
     public function search(Request $request){
         $search = $request->input('search') ?: "";
 
@@ -134,7 +126,4 @@ class ContactsController extends Controller{
             return redirect('/contact')->with('warning', 'Nema traženog korisnika!');
         }
     }
-
-
-  
 }

@@ -17,17 +17,13 @@ class UserController extends Controller
         $id = Auth::id();
         $sumContactsAll = Contact::all()->count();
         $sumContacts = Contact::select()->where('user_id', $id)->count();
-        //$sumContacts = count($contacts);
-
+       
         $sumTickets = Ticket::select()->where('user_id', $id)->count();
-        //$sumTickets = count($tickets);
-
+       
         $openTickets = Ticket::select()->where('user_id', $id)->where('status','Otvoreno')->count();
-        //$openTickets = count($tickets);
-
+    
         $closeTickets = Ticket::select()->where('user_id', $id)->where('status','Zatvoreno')->count();
-        //$closeTickets = count($tickets);
-
+    
         $proposalTicket = Category::where('name', 'Prijedlog')
                                     ->pluck('id');
                                     
@@ -49,10 +45,16 @@ class UserController extends Controller
                             ->where('category_id', $complaintHardTicket )
                             ->count();
 
-        
-      return view('dashboard', compact('sumContacts','sumContactsAll', 'sumTickets','openTickets',
-                                        'closeTickets', 'proposalTicket','complaintTicket','complaintHardTicket'));
-                            
+        $data = array(
+            'sumContacts' => $sumContacts,
+            'sumContactsAll' => $sumContactsAll,
+            'sumTickets' => $sumTickets,
+            'openTickets' => $openTickets,
+            'closeTickets' => $closeTickets,
+            'proposalTicket' => $proposalTicket,
+            'complaintTicket' => $complaintTicket,
+            'complaintHardTicket' => $complaintHardTicket
+        );
+      return view('dashboard', compact('data'));                        
     }
-
 }

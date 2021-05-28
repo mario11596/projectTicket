@@ -7,14 +7,10 @@ use App\Events\NewTicketEvent;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use App\Mail\MyMail;
-
 use App\Models\Ticket;
 use App\Models\Contact;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Mail;
+
 
 class TicketsController extends Controller
 {
@@ -66,19 +62,21 @@ class TicketsController extends Controller
         $ticket->save();
 
 
-        event(new NewTicketEvent($ticket)); //user
+        event(new NewTicketEvent($ticket)); 
       
         return redirect('/ticket')->with('success', 'Uspješno je spremljen novi zahtjev');
     }
+
     public function ticketClose($id){
         $ticket = Ticket::where('id',$id)->firstOrFail();
         $ticket->status = "Zatvoreno";
         $ticket->save();
 
-        event(new CloseTicketEvent($ticket)); //kontakt
+        event(new CloseTicketEvent($ticket));
 
         return redirect('/ticket')->with('warning', 'Uspješno je zatvoren zahtjev korisnika ' );  
     }
+
     public function ticketOpen($id){
         $ticket = Ticket::where('id',$id)->firstOrFail();
         $ticket->status = "Otvoreno";
@@ -115,14 +113,11 @@ class TicketsController extends Controller
         } else {
              return redirect('/ticket')->with('warning', 'Nema traženog zahtjeva!');
         }
-        
-        //return view('tickets.index', compact('tickets'));
     }
 
     public function ticketShow($id){ 
         $ticket = Ticket::where('id', $id)->first();
 
         return view('tickets.show', compact('ticket'));
-    }
-     
+    }    
 }

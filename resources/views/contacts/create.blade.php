@@ -14,9 +14,9 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-red-100">
+    <div class="py-12 bg-red-100" style="height: 86%;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a href="{{ route('index') }}" class="btn btn-warning">Vrati se natrag</a>
+            <a href="{{ route('contacts.index') }}" class="btn btn-warning">Vrati se natrag</a>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
@@ -32,7 +32,7 @@
                 @endif
 
 
-                <form action="{{ route('store') }}" method="POST" >
+                <form action="{{ route('contacts.store') }}" method="POST" >
                  @csrf
 
                 <div class="row">
@@ -43,57 +43,54 @@
                         </div>
                     </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Godine starosti:</strong>
-                        <input class="form-control" name="age" type="number"  placeholder="godine starosti"/>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Godine starosti:</strong>
+                            <input class="form-control" name="age" type="number"  placeholder="godine starosti"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                         <strong>Adresa stanovanja:</strong>
-                        <input type="text" name="address"  class="form-control" placeholder="adresa stanovanja">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Adresa stanovanja:</strong>
+                            <input type="text" name="address"  class="form-control" placeholder="adresa stanovanja">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Broj mobilnog telefona:</strong>
-                        <input type="text" name="mobile" class="form-control" placeholder="broj mobilnog telefona">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Broj mobilnog telefona:</strong>
+                            <input type="text" name="mobile" class="form-control" placeholder="broj mobilnog telefona">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>E-mail adresa:</strong>
-                        <input type="text" name="email" class="form-control" placeholder="e-mail adresa">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>E-mail adresa:</strong>
+                            <input type="text" name="email" class="form-control" placeholder="e-mail adresa">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Stanje tekućeg računa:</strong>
-                        <input type="number" name="currentaccountbalance" class="form-control" placeholder="stanje tekućeg računa">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Stanje tekućeg računa:</strong>
+                            <input type="number" name="currentaccountbalance" class="form-control" placeholder="stanje tekućeg računa">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Iznos trenutnog kredita:</strong>
-                        <input type="number" name="credit" class="form-control" placeholder="iznos kredita">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Iznos trenutnog kredita:</strong>
+                            <input type="number" name="credit" class="form-control" placeholder="iznos kredita">
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary">Spremi kontakt</button>
-                </div>
-
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Spremi kontakt</button>
+                    </div>
                 </div>
                 </form>
-
-            
-              </div>
+                </div>
             </div>
         </div>
     </div>

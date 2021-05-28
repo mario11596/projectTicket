@@ -2,7 +2,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <div class="input-group">
+        <div class="input-group ">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
             <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
@@ -14,8 +14,8 @@
             </h2>
         </div>
     </x-slot> 
+
     <div class="py-10 bg-gray-200">
-    
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -36,7 +36,7 @@
                 @endif
                 <nav class="flex flex-row">
                 <div class="input-group">
-                    <form action="{{ route('search') }}" method="GET" role="search">
+                    <form action="{{ route('contacts.search') }}" method="GET" role="search">
                         <input type="text" placeholder="Pretraži..." name="search" required/>
                             <button type="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" type="submit">
@@ -52,59 +52,55 @@
                     </form>
                 </div>
             
-             <a href="{{ route('create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
-             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
-                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-            </svg></a>
-             </nav>
+                <a href="{{ route('contacts.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                </svg></a>
+                </nav>
            
             
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                <table class="table table-bordered table-responsive-lg table table-stripe">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <table class="table table-bordered table-responsive-lg table table-stripe">
                 
-                <tr class="bg-yellow-100">
-                
-                    <th>Ime i prezime</th>
-                    <th>Godine starosti</th>
-                    <th>Adresa stanovanja</th>
-                    <th>Broj mobilnog telefona</th>
-                    <th>E-mail adresa</th>
-                    <th>Stanje tekućeg računa</th>
-                    <th>Iznos trenutnog kredita</th>
-                   
-                
-                </tr>
-                    @foreach ($contacts as $contact)
-                  
-                    <tr>
-                        <td>{{ $contact->name }}</td>
-                        <td>{{ $contact->age }}</td>
-                        <td>{{ $contact->address }}</td>
-                        <td>{{ $contact->mobile }}</td>
-                        <td>{{ $contact->email }}</td>
-                        <td>{{ $contact->currentaccountbalance }} kn</td>
-                        <td>{{ $contact->credit}} kn</td>
-                        <td>
-                        <a href="{{ route('edit', $contact->id) }}" class="btn btn-info">Uredi</a>
-                        </td>
-                        <td>
-                        <a href="{{ route('destroy', $contact->id) }}" class="btn btn-danger">Obriši</a>         
-                        </td>
-                        <td>
-                        <a href="{{ route('show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
-                        </td>
-                        <td>
-                        <a href="{{ route('ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
-                        </td>
-                    </tr>  
-                                    
-                    @endforeach
-                </table>
-                 {{isset($search)? $contacts->appends(['search'=> $search])->links() : $contacts->links()}}                
+                        <tr class="bg-yellow-100">
+                            <th>Ime i prezime</th>
+                            <th>Godine starosti</th>
+                            <th>Adresa stanovanja</th>
+                            <th>Broj mobilnog telefona</th>
+                            <th>E-mail adresa</th>
+                            <th>Stanje tekućeg računa</th>
+                            <th>Iznos trenutnog kredita</th>
+                        </tr>
+
+                        @foreach ($contacts as $contact)
+                        <tr>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->age }}</td>
+                            <td>{{ $contact->address }}</td>
+                            <td>{{ $contact->mobile }}</td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->currentaccountbalance }} kn</td>
+                            <td>{{ $contact->credit}} kn</td>
+                            <td>
+                            <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-info">Uredi</a>
+                            </td>
+                            <td>
+                            <a href="{{ route('contacts.destroy', $contact->id) }}" class="btn btn-danger">Obriši</a>         
+                            </td>
+                            <td>
+                            <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
+                            </td>
+                            <td>
+                            <a href="{{ route('tickets.ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
+                            </td>
+                        </tr>             
+                        @endforeach
+                        </table>
+                    {{isset($search)? $contacts->appends(['search'=> $search])->links() : $contacts->links()}}                
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </x-app-layout>

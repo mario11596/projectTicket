@@ -12,7 +12,7 @@
             </h2>
         </div>
     </x-slot> 
-    <div class="py-10 bg-gray-200">
+    <div class="py-10 bg-gray-200" style="height: 86%;">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @if ($message = Session::get('success'))
@@ -35,7 +35,7 @@
 
             <nav class="flex flex-row">
                 <div class="input-group">
-                    <form action="{{ route('ticketSearch') }}" method="GET" role="search">
+                    <form action="{{ route('tickets.ticketSearch') }}" method="GET" role="search">
                         <input type="text" placeholder="Pretraži..." name="search" required/>
                         <button type="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16" type="submit">
@@ -51,64 +51,65 @@
                     </form>
                 </div>
 
-            
-             <a href="{{ route('ticketCreate') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
-             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
-            <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
-            <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
-            </svg></a>
+                
+                <a href="{{ route('tickets.ticketCreate') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
+                <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
+                <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
+                </svg></a>
             </nav>
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                <table class="table table-bordered table-responsive-lg table table-stripe">
-                <tr class="bg-yellow-100">
-                    <th>Naslov zahtjeva</th>
-                    <th>Korisnik</th>
-                    <th>E-mail adresa</th>
-                    <th>Prioritet</th>
-                    <th>Vrsta zahtjeva</th>
-                    <th>Status zahtjeva</th>
-                    <th>Otvori / Zatvori</th>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <table class="table table-bordered table-responsive-lg table table-stripe">
+                        <tr class="bg-yellow-100">
+                            <th>Naslov zahtjeva</th>
+                            <th>Korisnik</th>
+                            <th>E-mail adresa</th>
+                            <th>Prioritet</th>
+                            <th>Vrsta zahtjeva</th>
+                            <th>Status zahtjeva</th>
+                            <th>Otvori / Zatvori</th>
                     
 
-                </tr>
-                    @foreach ($tickets as $ticket)
-                    <tr>
-                        <td>{{ $ticket->title }}</td>
-                        <td>{{  $ticket->contact->name}} </td>
-                        <td>{{ $ticket->contact->email}}</td>
-                        <td>{{ $ticket->priority }}</td>
-                        <td>{{ $ticket->category->name }}</td>
-                        <td>
-                        @if($ticket->status == 'Otvoreno')
-                            <p class="text-success ">{{ $ticket->status }}</p>
-                        </td>
-                        @else
-                         <p class="text-warning">{{ $ticket->status }}</p>
-                         @endif
-                         </td>
-
-                        @if($ticket->status == 'Otvoreno')
+                        </tr>
+                        @foreach ($tickets as $ticket)
+                        <tr>
+                            <td>{{ $ticket->title }}</td>
+                            <td>{{  $ticket->contact->name}} </td>
+                            <td>{{ $ticket->contact->email}}</td>
+                            <td>{{ $ticket->priority }}</td>
+                            <td>{{ $ticket->category->name }}</td>
                             <td>
-                            <a href="{{ route('ticketClose', $ticket->id) }}" class="btn btn-warning">Zatvori zahtjev</a>
-                            </td>          
-                        @else 
-                            <td>
-                            <a href="{{ route('ticketOpen', $ticket->id) }}" class="btn btn-success">Otvori zahtjev</a>
-                            </td>                        
-                        @endif 
+                            @if($ticket->status == 'Otvoreno')
+                                <p class="text-success ">{{ $ticket->status }}</p>
+                            </td>
+                            @else
+                            <p class="text-warning">{{ $ticket->status }}</p>
+                            @endif
+                            </td>
 
-                        <td>
-                        <a href="{{ route('ticketDestroy', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
-                        </td>
-                        <td>
-                        <a href="{{ route('ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
-                        </td>                    
-                    </tr>                        
-                    @endforeach
-                </table> 
-                    {{isset($search)? $tickets->appends(['search'=> $search])->links() : $tickets->links()}}       
+                            @if($ticket->status == 'Otvoreno')
+                                <td>
+                                <a href="{{ route('tickets.ticketClose', $ticket->id) }}" class="btn btn-warning">Zatvori zahtjev</a>
+                                </td>          
+                            @else 
+                                <td>
+                                <a href="{{ route('tickets.ticketOpen', $ticket->id) }}" class="btn btn-success">Otvori zahtjev</a>
+                                </td>                        
+                            @endif 
+
+                            <td>
+                            <a href="{{ route('tickets.ticketDestroy', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
+                            </td>
+                            <td>
+                            <a href="{{ route('tickets.ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
+                            </td>                    
+                        </tr>                        
+                            @endforeach
+                        </table> 
+                        {{isset($search)? $tickets->appends(['search'=> $search])->links() : $tickets->links()}}  
+                    </div>     
                 </div>
             </div>
         </div>

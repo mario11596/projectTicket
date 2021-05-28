@@ -4,10 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>TicketSustav</title>
-
-        <!-- Fonts -->
+       
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
@@ -18,30 +16,34 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
-                
+                background-image: url('https://i.pinimg.com/originals/5a/c1/29/5ac1296b709f4427d4c7785a322d78a2.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100%; 
             }
         </style>
     </head>
     <body>
       
-        <div class="relative flex items-top justify-center min-h-screen sm:items-center bg-info ">
+        <div class="relative flex items-top justify-center min-h-screen sm:items-center">
             @if (Route::has('login'))
             <div class="card text_center " style="width: 20rem; height: 20rem">
-                <div class="card-body">
-                    <h5 class="card-title card-header fw-bold ">Dobro došli u Ticket sustav</h5>
+                <div class="card-body"  style="background: rgb(255, 204, 204)">
+                    <h5 class="card-title card-header fw-bold"  style="background: rgb(255, 179, 179)">Dobro došli u Ticket sustav</h5>
                          <p class="card-text"> Odaberite jednu od mogućnosti prijave u naš sustav:
                     @auth
                         <div style="height: 30%"> Povratak u profil: 
-                        <a href="{{ url('/dashboard') }}" class=" ml-3 text-sm text-black-700 btn btn-primary">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class=" ml-3 text-sm text-black-700 btn btn-warning fw-bold">Dashboard</a>
                         </div>
                     @else
                         <div style="height: 30%"> Za postojeće korisnike: 
-                        <a href="{{ route('login') }}" class= " ml-3 text-sm text-black-700 btn btn-primary">Log in</a>
+                        <a href="{{ route('login') }}" class= " ml-3 text-sm text-black-700 btn btn-warning fw-bold">Login</a>
                         </div>
 
                         @if (Route::has('register'))
                             <div style="height: 30%"> Za nove korisnike:
-                            <a href="{{ route('register') }}" class="ml-3 text-sm text-black-700 btn btn-primary">Registracija</a>
+                            <a href="{{ route('register') }}" class="ml-3 text-sm text-black-700 btn btn-warning fw-bold">Registracija</a>
                             </div>
                         @endif
                     @endauth

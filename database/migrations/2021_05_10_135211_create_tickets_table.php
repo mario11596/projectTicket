@@ -15,8 +15,8 @@ class CreateTicketsTable extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); //samo za taj user
-            $table->unsignedBigInteger('contact_id'); //samo za taj kontakt
+            $table->unsignedBigInteger('user_id'); 
+            $table->unsignedBigInteger('contact_id'); 
             $table->unsignedBigInteger('category_id');
             $table->string('title');
             $table->string('priority');

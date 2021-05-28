@@ -18,19 +18,15 @@
 
     </x-slot>
     
-
     <div class="py-12 bg-gray-200" >
-    
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
         <div class="row ">
             <div class="col-sm-6 ">
                 <div class="card p-3 mb-2 rounded-lg bg-yellow-100">
                     <div class="card-body ">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Kontakti</h5>
-                        <p class="card-text">Ukupan broj kontakata: {{ $sumContactsAll }} </p>
-                        <p class="card-text">Trenutan broj Vaših kontakta: {{ $sumContacts }} </p>
-                        
+                        <p class="card-text">Ukupan broj kontakata: {{ $data['sumContactsAll'] }} </p>
+                        <p class="card-text">Trenutan broj Vaših kontakta: {{ $data['sumContacts'] }} </p>    
                     </div>
                 </div>
             </div>
@@ -39,10 +35,9 @@
                 <div class="card p-2 mb-2 rounded-lg bg-yellow-100">
                     <div class="card-body">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Zahtjevi</h5>
-                        <p class="card-text">Trenutan broj zahtjeva:  {{ $sumTickets}}</p>
-                        <p class="card-text text-danger">Trenutan broj otvorenih zahtjeva:  {{ $openTickets}} </p>
-                        <p class="card-text text-success">Trenutan broj zatvorenih zahtjeva:  {{ $closeTickets}}</p>
-                       
+                        <p class="card-text">Trenutan broj zahtjeva:  {{ $data['sumTickets'] }}</p>
+                        <p class="card-text text-danger">Trenutan broj otvorenih zahtjeva:  {{ $data['openTickets'] }} </p>
+                        <p class="card-text text-success">Trenutan broj zatvorenih zahtjeva:  {{ $data['closeTickets'] }}</p>    
                     </div>
                 </div>
             </div>
@@ -58,7 +53,7 @@
     
                     <h1 class="mt-4 text-xl text-center font-semibold text-gray-800 dark:text-white ">Ukupan postotak Vaših kontakata</h1>
     
-                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$sumContacts / (float)$sumContactsAll * 100),2 )}} %</p>
+                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['sumContacts'] / (float)$data['sumContactsAll'] * 100),2 )}} %</p>
                 </div>
     
                 <div class="p-3 mb-2 bg-danger text-white rounded-lg ">
@@ -70,7 +65,7 @@
     
                     <h1 class="mt-4 text-xl text-center font-semibold text-gray-800 dark:text-white">Postotak otvorenih zahtjeva</h1>
                     
-                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$openTickets / (float)$sumTickets * 100),2 )}} %</p>
+                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['openTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
                 </div>
                 
                 <div class="p-3 mb-2 bg-success text-white rounded-lg">
@@ -82,7 +77,7 @@
                 
                     <h1 class="mt-4 text-xl text-center font-semibold text-gray-800 dark:text-white">Postotak obrađenih zahtjeva</h1>
                 
-                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$closeTickets / (float)$sumTickets * 100),2 )}} %</p>
+                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['closeTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
                 </div>
             </div>
         </div>
@@ -92,9 +87,9 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <div id="piechart_3d" style="width: 1000px; height: 500px;" class="max-w-7xl mx-auto sm:px-6 lg:px-8""></div>
             <script type="text/javascript">
-            var proposalTicket = <?php echo json_encode($proposalTicket); ?>;
-            var complaintTicket = <?php echo json_encode($complaintTicket); ?>;
-            var complaintHardTicket = <?php echo json_encode($complaintHardTicket); ?>;
+            var proposalTicket = <?php echo json_encode($data['proposalTicket']); ?>;
+            var complaintTicket = <?php echo json_encode($data['complaintTicket']); ?>;
+            var complaintHardTicket = <?php echo json_encode($data['complaintHardTicket']); ?>;
 
             google.charts.load('current', {'packages':['corechart']});
             google.charts.setOnLoadCallback(drawChart);
@@ -111,6 +106,10 @@
             var options = {
                 title: 'Pregled zahtjeva po kategorijama',
                 is3D: true,
+                titleTextStyle: {
+                    fontSize: 19,
+                    italic: true
+                }
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -123,8 +122,6 @@
                 <p class="py-2 text-gray-800 dark:text-white sm:py-0">@All rights reserved by Tvrtka d.o.o</p>
             </footer>
         </div>
-
         </div>
-    </div>
-            
+    </div>          
 </x-app-layout>
