@@ -12,7 +12,7 @@
         </div>
     </x-slot>
 
-    <div class="py-12 bg-red-100" style="height: 86%;">
+    <div class="py-12 bg-red-100" style="height: 100%;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <a href="{{ route('contacts.index') }}" class="btn btn-warning">Vrati se natrag</a>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

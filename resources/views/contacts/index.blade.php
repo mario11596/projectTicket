@@ -15,7 +15,7 @@
         </div>
     </x-slot> 
 
-    <div class="py-10 bg-gray-200">
+    <div class="py-10 bg-gray-200" style="height: 100%;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">

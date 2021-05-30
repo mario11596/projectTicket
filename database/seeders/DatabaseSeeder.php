@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             'id' => 3, 'name' => 'Žalba'
         ]);
 
-        Ticket::factory()->count(2)->create([
+        Ticket::factory()->count(100)->create([
             'status' => 'Otvoreno']
         );
     }
