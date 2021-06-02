@@ -23,15 +23,16 @@
                     @foreach($notifications as $notification)
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="alert alert-warning">
+                            <div class="alert alert-success">
                                 {{ $notification->created_at->diffForhumans() }} </br>
                                 Zahtjev: {{ $notification->data['title'] }}, vrste prioriteta 
                                     {{ $notification->data['priority'] }} je uspješno zaprimljen.
+                                    <a href="{{ route('notifications.notificationMarkOne', $notification->id) }}" class="float-right mark-as-read">Označi kao pročitano</a>   
                             </div>
                         </div>
                     </div>
                     @endforeach
-                    <a href="{{ route('notifications.notificationMark', $notification->id) }}" class="btn btn-warning">Označi kao pročitano</a>
+                    <a href="{{ route('notifications.notificationMark', $notification->id) }}" class="btn btn-warning">Označi sve kao pročitano</a>
                     </div>
                 @else
                 <strong>Trenutno nema novih obavijesti</strong>

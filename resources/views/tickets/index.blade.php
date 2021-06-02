@@ -70,8 +70,7 @@
                             <th>Vrsta zahtjeva</th>
                             <th>Status zahtjeva</th>
                             <th>Otvori / Zatvori</th>
-                    
-
+                            <th>Opcije</th>
                         </tr>
                         @foreach ($tickets as $ticket)
                         <tr>
@@ -98,12 +97,9 @@
                                 <a href="{{ route('tickets.ticketOpen', $ticket->id) }}" class="btn btn-success">Otvori zahtjev</a>
                                 </td>                        
                             @endif 
-
-                            <td>
-                            <a href="{{ route('tickets.ticketDestroy', $ticket->id) }}" class="btn btn-danger">Obriši</a>         
-                            </td>
-                            <td>
-                            <a href="{{ route('tickets.ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
+                            <td class="flex items-stretch space-x-2">
+                                <a href="{{ route('tickets.ticketDestroy', $ticket->id) }}" onclick="return confirm('Jeste li sigurni da želite izbrisati zahtjev ?');" class="btn btn-danger">Obriši</a>         
+                                <a href="{{ route('tickets.ticketShow', $ticket->id) }}" class="btn btn-success">Prikaži</a>         
                             </td>                    
                         </tr>                        
                             @endforeach

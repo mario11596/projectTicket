@@ -24,10 +24,12 @@ class TicketFactory extends Factory
      */
     public function definition()
     {
-        $user_id = User::all()->random()->id;
+        $contact = Contact::all()->random();
+        $user_id = $contact->user_id;
+        
         return [
             'user_id' => $user_id,
-            'contact_id' => Contact::where("user_id","=", $user_id)->get()->random()->id,
+            'contact_id' => $contact->id,
             'category_id' => Category::all()->random()->id,
             'title' => $this->faker->sentence(),
             'priority' => $this->faker->randomElement(['Nije hitno','Može pričekati', 'Požuriti', 'Hitno']),

@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     
     public function run()
     {
-       User::factory(10)->create();
+        User::factory(10)->create();
 
-        Contact::factory(400)->create(); 
+        Contact::factory(200)->create(); 
 
         Category::create([
             'id' => 1, 'name' => 'Pritužba'
@@ -28,8 +28,9 @@ class DatabaseSeeder extends Seeder
             'id' => 3, 'name' => 'Žalba'
         ]);
 
-        Ticket::factory()->count(100)->create([
+        Ticket::factory(300)->create([
             'status' => 'Otvoreno']
         );
     }
 }
+

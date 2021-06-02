@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/notifications', [NotificationsController::class, 'notificationIndex'])->name('notifications.notificationIndex');
     Route::get('/notifications/mark', [NotificationsController::class, 'notificationMark'])->name('notifications.notificationMark');
+    Route::get('/notifications/{id}', [NotificationsController::class, 'notificationMarkOne'])->name('notifications.notificationMarkOne');
 
     
 });

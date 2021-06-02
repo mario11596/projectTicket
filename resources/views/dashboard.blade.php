@@ -39,22 +39,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="row ">
             <div class="col-sm-6 ">
-                <div class="card p-3 mb-2 rounded-lg bg-yellow-100">
+                <div class="card p-3 mb-2 border-double border-4 rounded-lg bg-yellow-100">
                     <div class="card-body ">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Kontakti</h5>
                         <p class="card-text">Ukupan broj kontakata: {{ $data['sumContactsAll'] }} </p>
-                        <p class="card-text">Trenutan broj Vaših kontakta: {{ $data['sumContacts'] }} </p>    
+                        <p class="card-text">Trenutan broj Vaših kontakta: {{ $data['sumContacts'] }} </p> 
                     </div>
                 </div>
             </div>
 
             <div class="col-sm-6">
-                <div class="card p-2 mb-2 rounded-lg bg-yellow-100">
+                <div class="card p-2 mb-2 border-double border-4 rounded-lg bg-yellow-100">
                     <div class="card-body">
                         <h5 class="card-title fs-3 fw-bolder text-decoration-underline">Zahtjevi</h5>
                         <p class="card-text">Trenutan broj zahtjeva:  {{ $data['sumTickets'] }}</p>
                         <p class="card-text text-danger">Trenutan broj otvorenih zahtjeva:  {{ $data['openTickets'] }} </p>
-                        <p class="card-text text-success">Trenutan broj zatvorenih zahtjeva:  {{ $data['closeTickets'] }}</p>    
+                        <p class="card-text text-success">Trenutan broj zatvorenih zahtjeva:  {{ $data['closeTickets'] }}</p>   
                     </div>
                 </div>
             </div>

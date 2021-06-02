@@ -72,6 +72,7 @@
                             <th>E-mail adresa</th>
                             <th>Stanje tekućeg računa</th>
                             <th>Iznos trenutnog kredita</th>
+                            <th>Opcije</th>
                         </tr>
 
                         @foreach ($contacts as $contact)
@@ -83,17 +84,11 @@
                             <td>{{ $contact->email }}</td>
                             <td>{{ $contact->currentaccountbalance }} kn</td>
                             <td>{{ $contact->credit}} kn</td>
-                            <td>
-                            <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-info">Uredi</a>
-                            </td>
-                            <td>
-                            <a href="{{ route('contacts.destroy', $contact->id) }}" class="btn btn-danger">Obriši</a>         
-                            </td>
-                            <td>
-                            <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
-                            </td>
-                            <td>
-                            <a href="{{ route('tickets.ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
+                            <td class="flex items-stretch space-x-2">
+                                <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-info">Uredi</a>
+                                <a href="{{ route('contacts.destroy', $contact->id) }}" onclick="return confirm('Jeste li sigurni da želite izbrisati kontakt?');" class="btn btn-danger">Obriši</a>         
+                                <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-success">Prikaži</a>         
+                                <a href="{{ route('tickets.ticketCreateUser', $contact->name) }}" class="btn btn-secondary">Zahtjev</a>         
                             </td>
                         </tr>             
                         @endforeach

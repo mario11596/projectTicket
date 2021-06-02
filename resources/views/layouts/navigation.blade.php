@@ -14,22 +14,22 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex ">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" >
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')">
+                    <x-nav-link :href="route('contacts.index')" :active="request()->routeIs('contacts.index')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Svi kontakti') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('contacts.create')" :active="request()->routeIs('contacts.create')">
+                    <x-nav-link :href="route('contacts.create')" :active="request()->routeIs('contacts.create')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Novi kontakt') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tickets.ticketIndex')" :active="request()->routeIs('tickets.ticketIndex')">
+                    <x-nav-link :href="route('tickets.ticketIndex')" :active="request()->routeIs('tickets.ticketIndex')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Svi zahtjevi') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('tickets.ticketCreate')" :active="request()->routeIs('tickets.ticketCreate')">
+                    <x-nav-link :href="route('tickets.ticketCreate')" :active="request()->routeIs('tickets.ticketCreate')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Novi zahtjev') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('notifications.notificationIndex')" :active="request()->routeIs('notifications.notificationIndex')">
+                    <x-nav-link :href="route('notifications.notificationIndex')" :active="request()->routeIs('notifications.notificationIndex')" class="mx-2 mt-2 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded-md md:mt-0 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-700">
                         {{ __('Obavijesti') }}
                     </x-nav-link>
                     
