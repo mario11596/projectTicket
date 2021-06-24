@@ -16,8 +16,7 @@ class TicketsController extends Controller
 {
    public function ticketIndex(){  
        
-        $id = Auth::id();
-        $tickets = Ticket::select()->where('user_id', $id)->paginate(5);
+        $tickets = Ticket::select()->where('user_id', Auth::id())->paginate(5);
 
         return view('tickets.index', compact('tickets'));
     }
@@ -30,9 +29,7 @@ class TicketsController extends Controller
     }
 
     public function ticketStore(Request $request){ 
-
-        $user_id = Auth::id();
-
+        
         $request->validate([
             'category' => 'required',
             'title' => 'required|max:30',
@@ -57,7 +54,7 @@ class TicketsController extends Controller
         $ticket->priority = request('priority');
         $ticket->message = request('message');
         $ticket->status = "Otvoreno";
-        $ticket->user_id = $user_id;
+        $ticket->user_id = Auth::id();
 
         $ticket->save();
 
@@ -73,6 +70,7 @@ class TicketsController extends Controller
         $ticket->save();
 
         event(new CloseTicketEvent($ticket));
+        //CloseTicketEvent::dispatch($ticket);
 
         return redirect('/ticket')->with('warning', 'Uspješno je zatvoren zahtjev korisnika ' );  
     }

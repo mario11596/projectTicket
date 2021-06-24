@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Builder;
-use function PHPUnit\Framework\isEmpty;
+
 
 class ContactsController extends Controller{
 
     public function index(){  
        
-        $id = Auth::id();
-        $contacts = Contact::select()->where('user_id', $id)->paginate(5);
+        $contacts = Contact::select()->where('user_id', Auth::id())->paginate(5);
 
         return view('contacts.index', compact('contacts'));
     }
@@ -25,7 +24,6 @@ class ContactsController extends Controller{
 
     public function store(Request $request){ 
 
-        $user_id = Auth::id();
 
         $request->validate([
             'name' => 'required|max:30',
@@ -36,24 +34,15 @@ class ContactsController extends Controller{
             'currentaccountbalance' => 'required',
             'credit' => 'required',
         ]);
-    
-        $contact = new Contact();
-        $contact->name = request('name');
-        $contact->age = request('age');
-        $contact->address = request('address');
-        $contact->mobile = request('mobile');
-        $contact->email = request('email');
-        $contact->currentaccountbalance = request('currentaccountbalance');
-        $contact->credit = request('credit');
-        $contact->user_id = $user_id;
-        $contact->save();
+        $data = array_merge($request->all(), ['user_id' => Auth::id()]);
+        $contact = Contact::query()->create($data);
+
 
         return redirect('/contact')->with('success', 'Uspješno je spremljen novi kontakt');
     }
     
-    public function edit($id){
-        $contact = Contact::findorFail($id);
-
+    public function edit(Contact $contact){
+    
         if($contact->user_id != Auth::id()){
             return redirect('/contact');
         }
@@ -62,7 +51,6 @@ class ContactsController extends Controller{
 
     public function update(Request $request,$id){ 
 
-        $user_id = Auth::id();
         $contact = Contact::where("id","=",$id)->get()->first();
 
         $request->validate([
@@ -82,7 +70,7 @@ class ContactsController extends Controller{
         $contact->email = request('email');
         $contact->currentaccountbalance = request('currentaccountbalance');
         $contact->credit = request('credit');
-        $contact->user_id = $user_id;
+        $contact->user_id = Auth::id();
     
         $contact->save();
 
@@ -100,10 +88,9 @@ class ContactsController extends Controller{
         }
     }
 
-    public function show($id){ 
+    public function show(Contact $contact){ 
+        $tickets = $contact->ticket;
         $number = 0;
-        $contact = Contact::where('id',$id)->first();
-        $tickets = Ticket::where('contact_id',$id)->get();
 
         return view('contacts.show', compact('contact','tickets','number'));
     }

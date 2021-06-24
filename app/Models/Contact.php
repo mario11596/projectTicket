@@ -12,6 +12,7 @@ class Contact extends Model
     
     protected $fillable = [
         'name',
+        'user_id',
         'age',
         'address',
         'mobile',
@@ -25,6 +26,6 @@ class Contact extends Model
     }
 
     public function ticket(){
-        return $this->belongsTo(Ticket::class);
+        return $this->hasMany(Ticket::class);
     } 
 }

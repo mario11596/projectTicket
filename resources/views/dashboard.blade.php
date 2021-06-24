@@ -81,8 +81,11 @@
                     </svg>    
     
                     <h1 class="mt-4 text-xl text-center font-semibold text-gray-800 dark:text-white">Postotak otvorenih zahtjeva</h1>
-                    
-                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['openTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
+                    @if($data['sumTickets'] != 0)
+                        <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['openTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
+                    @elseif($data['sumTickets'] == 0)
+                        <p class="mt-2 text-black text-center font-bold fs-5"> 0 %</p>
+                    @endif
                 </div>
                 
                 <div class="p-3 mb-2 bg-success text-white rounded-lg">
@@ -93,8 +96,11 @@
                     </svg>
                 
                     <h1 class="mt-4 text-xl text-center font-semibold text-gray-800 dark:text-white">Postotak obrađenih zahtjeva</h1>
-                
-                    <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['closeTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
+                    @if($data['sumTickets'] != 0)
+                        <p class="mt-2 text-black text-center font-bold fs-5">{{ round(((float)$data['closeTickets'] / (float)$data['sumTickets'] * 100),2 )}} %</p>
+                    @elseif($data['sumTickets'] == 0)
+                        <p class="mt-2 text-black text-center font-bold fs-5"> 0 %</p>
+                    @endif
                 </div>
             </div>
         </div>
